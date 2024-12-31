@@ -12,6 +12,33 @@ LiB_API_KEY = "ce0c893b3fcd2b1080903988f1fdd1367c7f811cdcad7d0a3a2ab99666816111"
 os.environ["OPENAI_API_KEY"] = st.secrets["API_KEY"]
 client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"),)
 
+
+def fetch_library_data(startDt,endDt,gender,frome_age,to_age,pageSize,dtl_region):
+    """
+    도서관 정보나루 API를 호출하여 데이터를 가져옵니다.
+    """
+    base_url = "http://data4library.kr/api/loanItemSrch "
+    params = {
+        "authKey": api_key,
+        "startDt": startDt,  # 도서관 코드
+        "endDt": endDt,
+        "gender": gender,
+        "frome_age": frome_age,
+        "to_age": to_age,
+        "pageSize": pageSize,
+        "dtl_region": dtl_region,
+        
+    }
+
+    response = requests.get(base_url, params=params)
+    if response.status_code == 200:
+        return response.json()  # JSON 응답 반환
+    else:
+        st.error(f"API 호출 실패: {response.status_code}")
+        return None
+
+
+
 # 앱 제목
 st.title("📚도서 추천 시스템📚")
 st.subheader('서비스 제작중.')
@@ -44,12 +71,12 @@ st.divider()
 st.header("1. 조회 일자의 범위를 알려주세요")
 # 날짜와 시간 입력
 st.write("당월의 집계는 다음달에 나오니 이전 달까지 조회하시는 것을 추천드립니다.");
-selected_start_date = st.date_input("범위의 시작 날짜를 선택하세요")
-selected_end_time = st.date_input("범위의 끝 날짜을 선택하세요")
+startDt = st.date_input("범위의 시작 날짜를 선택하세요")
+endDt = st.date_input("범위의 끝 날짜을 선택하세요")
 
 # 결과 출력
 st.write("선택한 날짜와 시간:")
-st.write(f"{selected_start_date} {selected_end_time}")
+st.write(f"{startDt} {endDt}")
 
 st.divider()
 
@@ -64,11 +91,11 @@ age_start = -1
 age_end = -1
 st.header("2. 조회하고 싶은 연령의 범위를 알려주세요~")
 st.write("범위를 넓게 잡으시는 걸 추천드립니다.")
-age_start = st.text_input("범위의 시작 나이", placeholder="예: 20")
-age_end = st.text_input("범위의 끝 나이", placeholder="예: 29")
+frome_age = st.text_input("범위의 시작 나이", placeholder="예: 20")
+to_age = st.text_input("범위의 끝 나이", placeholder="예: 29")
 
 if age_end != -1 and age_start != -1:
-    st.write(f"나이 범위: {age_start}세 ~ {age_end}세")
+    st.write(f"나이 범위: {frome_age}세 ~ {to_age}세")
 
 st.divider()
 
@@ -79,12 +106,19 @@ age_group = st.radio(
     options=["전체", "여성", "남성"],
 )
 st.write(age_group)
+if(age_group == "남성"):
+  gender = 0
+elif(age_group == "여성"):
+  gender = 1
+else:
+  gender = 0;1;2
+  
 st.divider()
 
 #4. 페이지 크기 - 한 페이지당 제고되는 도서목록 개수 지정 pagesize
 st.header("4. 도서 추천 개수")
 
-page_size = st.text_input("원하시는 추천받으실 도서의 개수를 알려주세요 !",placeholder="예: 5 (꼭 숫자만 입력해주세요 ㅜㅡㅜ)")
+pageSize = st.text_input("원하시는 추천받으실 도서의 개수를 알려주세요 !",placeholder="예: 5 (꼭 숫자만 입력해주세요 ㅜㅡㅜ)")
 st.divider()
 
 #5. 도서구분 class_no 분류코드 
@@ -100,23 +134,38 @@ st.write("70 언어 71 한국어 72 중국어 73 일본어 74 영어 75 독일�
 st.write("81 한국문학 82 중국문학 83 일본문학 84 영미문학85 독일문학 86 프랑스문학 87 스페인문학 88 이탈리아문학 89 기타 제문학 ")
 st.write("90 역사 91 아시아(아세아) 92 유럽(구라파) 93 아프리카 94 북아메리카(북미) 95 남아메리카(남미) 96 오세아니아(대양주) 97 양극지방 98 지리 99 전기 ")
 
-divider_code = st.text_input("원하시는 도서구분 분류코드를 입력해주세요 !",placeholder="예시 : 41 (수학을 희망하는 경우)")
+dtl_region = st.text_input("원하시는 도서구분 분류코드를 입력해주세요 !",placeholder="예시 : 41 (수학을 희망하는 경우)")
 st.divider()
+
+url = "http://data4library.kr/api/loanItemSrch?authKey="+ api_key
+
 
 # 추천 도서 결과 버튼
 if st.button("추천 도서 확인"):
     st.subheader("📚 추천 도서 목록")
     # 여기서 도서관정보나루 API를 호출하여 데이터를 가져오고, 결과를 표시
-    st.write(f"선택한 조회 일자: {selected_start_date} {selected_end_time}")
-    st.write(f"입력한 관심사: 나이 범위: {age_start}세 ~ {age_end}세")
-    st.write(f"선택한 연령대: {age_start}세 ~ {age_end}세")
-    st.write(f"선택한 성별: {age_group}")
-    st.write(f"선택한 도서구분 분류코드: {divider_code}")
+    st.write(f"선택한 조회 일자: {startDt} {endDt}")
+    st.write(f"선택한 연령대: {frome_age}세 ~ {to_age}세")
+    st.write(f"선택한 성별: {gender}")
+    st.write(f"선택한 도서구분 분류코드: {dtl_region}")
+    st.write(f"도서 추천 개수: {pageSize}")
 
-    
-    
     st.info("추천 도서 목록은 API를 통해 곧 제공될 예정입니다.")
-    
+
+    data = fetch_library_data(startDt,endDt,gender,frome_age,to_age,pageSize,dtl_region)
+    if data:
+        # 데이터프레임으로 변환 (예: 대출 도서 목록)
+        books = data.get("response", {}).get("docs", [])
+        if books:
+            df = pd.DataFrame(books)
+            st.write(df)
+
+            # CSV로 저장
+            csv_file = "library_data.csv"
+            df.to_csv(csv_file, index=False)
+            st.success(f"데이터가 {csv_file}로 저장되었습니다.")
+        else:
+            st.warning("데이터가 없습니다.")
     # request
 
 
