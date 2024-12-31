@@ -20,7 +20,6 @@ st.divider()
 
 # 재료 입력 받기
 #food = st.text_input("aa .")
-key = st.secrets[Lib_API_KEY]
 url = "http://data4library.kr/api/extends/loanItemSrchByLib?authKey=[ce0c893b3fcd2b1080903988f1fdd1367c7f811cdcad7d0a3a2ab99666816111]&libCode=[도서관코드] "
 
 api_key = st.secrets["Lib_API_KEY"]
