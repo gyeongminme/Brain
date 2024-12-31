@@ -20,15 +20,15 @@ def fetch_library_data(startDt,endDt,gender,frome_age,to_age,pageSize,dtl_region
     base_url = "http://data4library.kr/api/loanItemSrch"
     params = {
         "authKey": api_key,
-        "startDt": startDt,  
-        "endDt": endDt,
-        "gender": gender,
-        "from_age": frome_age,
-        "to_age": to_age,
+        #"startDt": startDt,  
+        #"endDt": endDt,
+        #"gender": gender,
+        #"from_age": frome_age,
+        #"to_age": to_age,
         "pageSize": pageSize,
         "dtl_region": dtl_region,
         "format" : "json",
-        "pageNo" : "1"
+        #"pageNo" : "1"
     }
 
     response = requests.get(base_url, params=params)
