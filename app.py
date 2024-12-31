@@ -26,7 +26,7 @@ def fetch_library_data(startDt,endDt,gender,frome_age,to_age,pageSize,dtl_region
         "to_age": to_age,
         "pageSize": pageSize,
         "dtl_region": dtl_region,
-        
+        "format" : "json"
     }
 
     response = requests.get(base_url, params=params)
@@ -143,7 +143,7 @@ if st.button("추천 도서 확인"):
     # 여기서 도서관정보나루 API를 호출하여 데이터를 가져오고, 결과를 표시
     st.write(f"선택한 조회 일자: {startDt} {endDt}")
     st.write(f"선택한 연령대: {frome_age}세 ~ {to_age}세")
-    st.write(f"선택한 성별: {gender}")
+    st.write(f"선택한 성별: {age_group}")
     st.write(f"선택한 도서구분 분류코드: {dtl_region}")
     st.write(f"도서 추천 개수: {pageSize}")
 
