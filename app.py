@@ -26,7 +26,8 @@ def fetch_library_data(startDt,endDt,gender,frome_age,to_age,pageSize,dtl_region
         "to_age": to_age,
         "pageSize": pageSize,
         "dtl_region": dtl_region,
-        "format" : "json"
+        "format" : "json",
+        "pageNo" : "1"
     }
 
     response = requests.get(base_url, params=params)
