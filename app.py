@@ -17,7 +17,7 @@ def fetch_library_data(startDt,endDt,gender,frome_age,to_age,pageSize,dtl_region
     """
     도서관 정보나루 API를 호출하여 데이터를 가져옵니다.
     """
-    base_url = "http://data4library.kr/api/loanItemSrch "
+    base_url = "http://data4library.kr/api/loanItemSrch?authKey="
     params = {
         "authKey": api_key,
         "startDt": startDt,  # 도서관 코드
@@ -47,7 +47,6 @@ st.divider()
 
 # 재료 입력 받기
 #food = st.text_input("aa .")
-url = "http://data4library.kr/api/extends/loanItemSrchByLib?authKey=[ce0c893b3fcd2b1080903988f1fdd1367c7f811cdcad7d0a3a2ab99666816111]&libCode=[도서관코드] "
 
 api_key = st.secrets["Lib_API_KEY"]
 # API 키 출력 (테스트용)
