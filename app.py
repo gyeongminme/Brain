@@ -17,7 +17,7 @@ def fetch_library_data(startDt,endDt,gender,frome_age,to_age,pageSize,dtl_region
     """
     도서관 정보나루 API를 호출하여 데이터를 가져옵니다.
     """
-    base_url = "http://data4library.kr/api/loanItemSrch?authKey="
+    base_url = "http://data4library.kr/api/loanItemSrch"
     params = {
         "authKey": api_key,
         "startDt": startDt,  
