@@ -6,6 +6,7 @@ from openai import OpenAI
 import streamlit as st
 import requests
 import pandas as pd
+    #http://data4library.kr/api/loanItemSrch?authKey=ce0c893b3fcd2b1080903988f1fdd1367c7f811cdcad7d0a3a2ab99666816111&startDt=2020-01-01&endDt=2024-12-11&gender=1&frome_age=0&to_age=100&pageSize=2&dtl_region=00&format=json
 
 
 os.environ["OPENAI_API_KEY"] = st.secrets["API_KEY"]
@@ -19,10 +20,10 @@ def fetch_library_data(startDt,endDt,gender,frome_age,to_age,pageSize,dtl_region
     base_url = "http://data4library.kr/api/loanItemSrch?authKey="
     params = {
         "authKey": api_key,
-        "startDt": startDt,  # 도서관 코드
+        "startDt": startDt,  
         "endDt": endDt,
         "gender": gender,
-        "frome_age": frome_age,
+        "from_age": frome_age,
         "to_age": to_age,
         "pageSize": pageSize,
         "dtl_region": dtl_region,
