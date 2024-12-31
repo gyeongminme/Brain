@@ -13,30 +13,33 @@ os.environ["OPENAI_API_KEY"] = st.secrets["API_KEY"]
 client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"),)
 
 
-def fetch_library_data(startDt,endDt,gender,frome_age,to_age,pageSize,dtl_region):
-    """
-    도서관 정보나루 API를 호출하여 데이터를 가져옵니다.
-    """
+def fetch_library_data(startDt, endDt, gender, from_age, to_age, pageSize, dtl_region):
     base_url = "http://data4library.kr/api/loanItemSrch"
     params = {
         "authKey": api_key,
-        #"startDt": startDt,  
-        #"endDt": endDt,
-        #"gender": gender,
-        #"from_age": frome_age,
-        #"to_age": to_age,
+        "startDt": startDt,
+        "endDt": endDt,
+        "gender": gender,
+        "from_age": from_age,
+        "to_age": to_age,
         "pageSize": pageSize,
         "dtl_region": dtl_region,
-        "format" : "json",
-        #"pageNo" : "1"
+        "format": "json",
+        "pageNo": "1"
     }
 
     response = requests.get(base_url, params=params)
+    
+    # 디버깅용 URL 및 응답 출력
+    st.write(f"API 호출 URL: {response.url}")
+    st.write(f"API 응답: {response.json()}")
+
     if response.status_code == 200:
         return response.json()  # JSON 응답 반환
     else:
         st.error(f"API 호출 실패: {response.status_code}")
         return None
+
 
 
 
