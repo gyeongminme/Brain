@@ -23,7 +23,9 @@ st.divider()
 key = st.secrets[Lib_API_KEY]
 url = "http://data4library.kr/api/extends/loanItemSrchByLib?authKey=[ce0c893b3fcd2b1080903988f1fdd1367c7f811cdcad7d0a3a2ab99666816111]&libCode=[도서관코드] "
 
-st.write(key)
+api_key = st.secrets["Lib_API_KEY"]
+# API 키 출력 (테스트용)
+st.write(f"Loaded API Key: {api_key}")
  
 #http://data4library.kr/api/loanItemSrch?authKey=ce0c893b3fcd2b1080903988f1fdd1367c7f811cdcad7d0a3a2ab99666816111&startDt=2022-01-01&endDt=2022-03-31& 
 #gender=1&age=20&region=11;31&addCode=0&kdc=6&pageNo=1&pageSize=10
