@@ -120,7 +120,7 @@ st.divider()
 #4. 페이지 크기 - 한 페이지당 제고되는 도서목록 개수 지정 pagesize
 st.header("4. 도서 추천 개수")
 
-pageSize = st.text_input("원하시는 추천받으실 도서의 개수를 알려주세요 !",placeholder="예: 5 (꼭 숫자만 입력해주세요 ㅜㅡㅜ)")
+pageSize = st.text_input("원하시는 추천받으실 도서의s 개수를 알려주세요 !",placeholder="예: 5 (꼭 숫자만 입력해주세요 ㅜㅡㅜ)")
 st.divider()
 
 #5. 도서구분 class_no 분류코드 
@@ -192,4 +192,17 @@ st.sidebar.info(
 
 
 
+# 페이지 제목
+st.title("Streamlit에서 새 창 열기")
 
+# 버튼 클릭 시 새 창 열기
+if st.button("새 창 열기"):
+    js_code = """
+    <script>
+        window.open("https://www.google.com", "_blank");
+    </script>
+    """
+    st.markdown(js_code, unsafe_allow_html=True)
+
+# 설명
+st.write("버튼을 클릭하면 새 탭에서 Google 웹사이트가 열립니다.")
