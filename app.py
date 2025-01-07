@@ -173,6 +173,10 @@ with col1:
                 st.warning("데이터가 없습니다.")
         # request
 
+with col2:
+    st.subheader('서비스 제작중22.')
+    
+
 
 # 추가 정보 섹션
 st.sidebar.title("📖 도움말")
