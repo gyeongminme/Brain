@@ -173,6 +173,8 @@ with col1 :
                 st.warning("데이터가 없습니다.")
         # request
 
+with col2 :
+    st.title("col2 예시");
 
 # 추가 정보 섹션
 st.sidebar.title("📖 도움말")
