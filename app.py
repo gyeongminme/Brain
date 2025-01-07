@@ -187,6 +187,16 @@ st.sidebar.info(
 )
 
 
-
+st.markdown(
+    """
+    <style>
+    .css-18e3th9 {
+        flex: 1 1 100%;
+        max-width: 100%;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
 
