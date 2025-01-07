@@ -15,7 +15,7 @@ os.environ["OPENAI_API_KEY"] = st.secrets["API_KEY"]
 client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"),)
 
 
-def fetch_library_data(startDt, endDt, gender, from_age, to_age, pageSize, dtl_region):
+def fetch_library_data(startDt, endDt, gender, from_age, to_age, pageSize, dtl_kdc):
     base_url = "http://data4library.kr/api/loanItemSrch"
     params = {
         "authKey": api_key,
@@ -25,7 +25,7 @@ def fetch_library_data(startDt, endDt, gender, from_age, to_age, pageSize, dtl_r
         "from_age": from_age,
         "to_age": to_age,
         "pageSize": pageSize,
-        "dtl_region": dtl_region,
+        "dtl_kdc": dtl_kdc,
         "format": "json",
         "pageNo": "1"
     }
@@ -138,7 +138,7 @@ st.write("70 언어 71 한국어 72 중국어 73 일본어 74 영어 75 독일�
 st.write("89 기타 제문학81 한국문학 82 중국문학 83 일본문학 84 영미문학85 독일문학 86 프랑스문학 87 스페인문학 88 이탈리아문학")
 st.write("90 역사 91 아시아(아세아) 92 유럽(구라파) 93 아프리카 94 북아메리카(북미) 95 남아메리카(남미) 96 오세아니아(대양주) 97 양극지방 98 지리 99 전기 ")
 
-dtl_region = st.text_input("원하시는 도서구분 분류코드를 입력해주세요 !",placeholder="예시 : 41 (수학을 희망하는 경우)")
+dtl_kdc = st.text_input("원하시는 도서구분 분류코드를 입력해주세요 !",placeholder="예시 : 41 (수학을 희망하는 경우)")
 st.divider()
 
 url = "http://data4library.kr/api/loanItemSrch?authKey="+ api_key
@@ -151,12 +151,12 @@ if st.button("추천 도서 확인"):
     st.write(f"선택한 조회 일자: {startDt} {endDt}")
     st.write(f"선택한 연령대: {frome_age}세 ~ {to_age}세")
     st.write(f"선택한 성별: {age_group}")
-    st.write(f"선택한 도서구분 분류코드: {dtl_region}")
+    st.write(f"선택한 도서구분 분류코드: {dtl_kdc}")
     st.write(f"도서 추천 개수: {pageSize}")
 
     st.info("추천 도서 목록은 API를 통해 곧 제공될 예정입니다.")
 
-    data = fetch_library_data(startDt,endDt,gender,frome_age,to_age,pageSize,dtl_region)
+    data = fetch_library_data(startDt,endDt,gender,frome_age,to_age,pageSize,dtl_kdc)
     if data:
         # 데이터프레임으로 변환 (예: 대출 도서 목록)
         books = data.get("response", {}).get("docs", [])
