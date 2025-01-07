@@ -47,7 +47,7 @@ def fetch_library_data(startDt, endDt, gender, from_age, to_age, pageSize, dtl_r
 
 # 앱 제목
 st.title("📚도서 추천 시스템📚")
-st.subheader('맞춤형 도서 추천 !!!.')
+st.subheader('맞춤형 도서 추천 .')
 
 st.divider()
 
