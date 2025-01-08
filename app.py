@@ -12,7 +12,7 @@ st.set_page_config(layout="wide")
 
 con0, con1, con2 = st.columns([0.1,0.8,1])
 
-col1, col2 = st.columns([0.5,0.5])
+col1, center ,col2 = st.columns([0.45,0.1,0.45])
 
 
 os.environ["OPENAI_API_KEY"] = st.secrets["API_KEY"]
@@ -49,7 +49,17 @@ def fetch_library_data(startDt, endDt, gender, from_age, to_age, pageSize, dtl_k
 
 
 with con1:
+    st.markdown(
+        """
+        <div style="background-color: #ffcccc; padding: 20px; border-radius: 10px;">
+            <h3>Column 1</h3>
+            This is column 1 with a light red background.
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 # 앱 제목
+
     st.title("📚도서 추천 시스템📚")
     st.subheader('맞춤형 도서 추천 .')
 
@@ -200,9 +210,30 @@ with col1 :
             st.warning("추천 도서 목록이 없습니다.")
     else:
         st.error("API 응답을 가져오지 못했습니다.")
+      
+
+with center:
+    st.markdown(
+        """
+        <div style="background-color: #ccffcc; padding: 20px; border-radius: 10px;">
+            <h3>Column 2</h3>
+            This is column 2 with a light green background.
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
         
         
 with col2:
+    st.markdown(
+        """
+        <div style="background-color: #ccccff; padding: 20px; border-radius: 10px;">
+            <h3>Column 3</h3>
+            This is column 3 with a light blue background.
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
     st.title("도서 퀴즈 시스템")
     st.divider()
     
