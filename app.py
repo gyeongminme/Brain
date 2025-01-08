@@ -68,8 +68,7 @@ api_key = st.secrets["Lib_API_KEY"]
 
 # Streamlit 앱 제목
 with col1 :
-    st.title("도서 추천 시스템 !")
-    st.divider()
+
     st.markdown(
         """
         <div style="background-color: #ffcccc; padding: 20px; border-radius: 10px;">
@@ -79,6 +78,9 @@ with col1 :
         """,
         unsafe_allow_html=True
     )
+    
+    st.title("도서 추천 시스템 !")
+    st.divider()
 # 1. 조회 일자 입력 startdt end dt
 #2. 연령을 입력하시오 age 
 #3. 성별 gender
