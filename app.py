@@ -162,6 +162,7 @@ if st.button("추천 도서 확인"):
         books = data.get("response", {}).get("doc", [])
         if books:
             st.subheader("📚 추천 도서 목록")
+            st.write(books)
         for book in books:
             # 개별 책 정보 가져오기
             book_name = book.get("bookname", "제목 없음")
