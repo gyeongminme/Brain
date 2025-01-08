@@ -115,11 +115,11 @@ with col1 :
     )
     st.write(age_group)
     if(age_group == "남성"):
-    gender = 0
+        gender = 0
     elif(age_group == "여성"):
-    gender = 1
+        gender = 1
     else:
-    gender = 0;1;2
+        gender = 0;1;2
     
     st.divider()
 
