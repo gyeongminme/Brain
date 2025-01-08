@@ -160,7 +160,7 @@ if st.button("추천 도서 확인"):
     if data:
         # 데이터프레임으로 변환 (예: 대출 도서 목록)
         books = data.get("response", {}).get("docs", [])
-        st.write(books.get("bookname","없음"))
+        st.write(books[0].get("bookname","없음"))
         if books:
             st.subheader("📚 추천 도서 목록")
         for book in books:
