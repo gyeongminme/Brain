@@ -216,7 +216,7 @@ with col1 :
 with center:
     st.markdown(
         """
-        <div style="background-color: #ccffcc; padding: 20px; border-radius: 10px; height: 100vh; position: relative;">
+        <div style="background-color: #ccffcc; padding: 20px; border-radius: 10px; height: 250vh; position: relative;">
             <h3>Column 2</h3>
             
         </div>
