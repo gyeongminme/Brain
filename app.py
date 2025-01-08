@@ -217,7 +217,7 @@ with center:
     st.markdown(
         """
         <div style="background-color: #ccffcc; padding: 20px; border-radius: 10px; height: 250vh; position: relative;">
-            <h3>Column 2</h3>
+            <h3>📚📚📚</h3>
             
         </div>
         """,
@@ -237,9 +237,8 @@ with col2:
     )
     st.divider()
     
-    st.header("1. 조회 일자의 범위를 알려주세요")
+    st.header("책의 제목과 저자를 입력해주세요 !")
     # 날짜와 시간 입력
-    st.write("당월의 집계는 다음달에 나오니 이전 달까지 조회하시는 것을 추천드립니다.")
     
 
 # 추가 정보 섹션
