@@ -8,6 +8,9 @@ import requests
 import pandas as pd
     #http://data4library.kr/api/loanItemSrch?authKey=ce0c893b3fcd2b1080903988f1fdd1367c7f811cdcad7d0a3a2ab99666816111&startDt=2020-01-01&endDt=2024-12-11&gender=1&frome_age=0&to_age=100&pageSize=2&dtl_region=00&format=json
 
+st.set_page_config(layout="wide")
+
+
 col1, col2 = st.columns(2)
 
 
