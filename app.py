@@ -11,7 +11,7 @@ import pandas as pd
 
 st.set_page_config(layout="wide")
 
-con0, con1, con2 = st.columns([0.1,0.8,1])
+con0, con1, con2 = st.columns([0.1,0.8,0.1])
 col1, center ,col2 = st.columns([0.45,0.1,0.45])
 
 
@@ -56,7 +56,7 @@ def fetch_library_data(startDt, endDt, gender, from_age, to_age, pageSize, dtl_k
 with con1:
     st.markdown(
         """
-        <div style="background-color: #ffcccc; padding: 20px; border-radius: 10px;">
+        <div style="background-color: #fce303; padding: 20px; border-radius: 10px;">
             <h3>📚도서 추천 웹사이트📚</h3>
             이곳에서는 GPT4 API와 공공 도서관 데이터를 활용하여 독서 경험을 더욱 풍성하게 만들어드립니다. 독서를 좋아하는 모든 사람들에게 추천 도서를 제공하고, 재미있는 퀴즈로 책의 내용을 더 깊이 이해할 수 있는 기회를 제공합니다.
         </div>
