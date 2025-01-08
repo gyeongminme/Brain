@@ -33,8 +33,8 @@ def fetch_library_data(startDt, endDt, gender, from_age, to_age, pageSize, dtl_k
     response = requests.get(base_url, params=params)
     
     # 디버깅용 URL 및 응답 출력
-    st.write(f"API 호출 URL: {response.url}")
-    st.write(f"API 응답: {response.json()}")
+    #st.write(f"API 호출 URL: {response.url}")
+    #st.write(f"API 응답: {response.json()}")
 
     if response.status_code == 200:
         return response.json()  # JSON 응답 반환
