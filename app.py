@@ -146,18 +146,25 @@ st.divider()
 # 추천 도서 결과 버튼
 if st.button("추천 도서 확인"):
     st.subheader("📚 추천 도서 목록")
+    # 여기서 도서관정보나루 API를 호출하여 데이터를 가져오고, 결과를 표시
+    st.write(f"선택한 조회 일자: {startDt} {endDt}")
+    st.write(f"선택한 연령대: {frome_age}세 ~ {to_age}세")
+    st.write(f"선택한 성별: {age_group}")
+    st.write(f"선택한 도서구분 분류코드: {dtl_kdc}")
+    st.write(f"도서 추천 개수: {pageSize}")
 
-    # API 호출
-    data = fetch_library_data(startDt, endDt, gender, frome_age, to_age, pageSize, dtl_kdc)
-    st.write("API 응답 데이터:", data)  # 디버깅용 출력
+    st.info("추천 도서 목록은 API를 통해 곧 제공될 예정입니다.")
 
+    #
+    data = fetch_library_data(startDt,endDt,gender,frome_age,to_age,pageSize,dtl_kdc)
     if data:
-        # 'doc' 키에서 개별 도서 정보 가져오기
-        book = data.get("doc", {})
-        if not book:
-            st.warning("추천 도서 데이터가 없습니다. API 응답을 확인하세요.")
-        else:
-            # 도서 정보 추출
+        # 데이터프레임으로 변환 (예: 대출 도서 목록)
+        books = data.get("response", {}).get("docs", [])
+        st.write(books)
+        if books:
+            st.subheader("📚 추천 도서 목록")
+        for book in books:
+            # 개별 책 정보 가져오기
             book_name = book.get("bookname", "제목 없음")
             authors = book.get("authors", "저자 정보 없음")
             publisher = book.get("publisher", "출판사 정보 없음")
@@ -170,7 +177,7 @@ if st.button("추천 도서 확인"):
             if book_image_url:
                 st.image(book_image_url, width=150, caption=book_name)
             else:
-                st.write(f"📖 {book_name}")
+                st.write(f"📖 {book_name}")  # 이미지가 없는 경우 텍스트만 표시
 
             # 상세 정보 표시
             st.markdown(
@@ -183,9 +190,11 @@ if st.button("추천 도서 확인"):
                 """,
                 unsafe_allow_html=True,
             )
+            st.divider()  # 각 책 사이에 구분선 추가
     else:
-        st.error("API 응답이 비어 있거나 호출에 실패했습니다.")
-
+        st.warning("추천 도서 목록이 없습니다.")
+else:
+    st.error("API 응답을 가져오지 못했습니다.")
 
 
 # 추가 정보 섹션
