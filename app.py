@@ -10,7 +10,7 @@ import pandas as pd
 
 st.set_page_config(layout="wide")
 
-con0, con1, con2 = st.columns([0,1,0])
+con0, con1, con2 = st.columns([0.1,0.8,1])
 
 col1, col2 = st.columns([0.5,0.5])
 
