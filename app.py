@@ -10,6 +10,7 @@ import pandas as pd
 
 st.set_page_config(layout="wide")
 
+con1 = st.columns([1])
 
 col1, col2 = st.columns([0.5,0.5])
 
@@ -47,12 +48,12 @@ def fetch_library_data(startDt, endDt, gender, from_age, to_age, pageSize, dtl_k
 
 
 
-
+with con1:
 # 앱 제목
-st.title("📚도서 추천 시스템📚")
-st.subheader('맞춤형 도서 추천 .')
+    st.title("📚도서 추천 시스템📚")
+    st.subheader('맞춤형 도서 추천 .')
 
-st.divider()
+    st.divider()
 
 # 재료 입력 받기
 #food = st.text_input("aa .")
@@ -202,8 +203,13 @@ with col1 :
         
         
 with col2:
-    st.title("2번째열")
-
+    st.title("도서 퀴즈 시스템")
+    st.divider()
+    
+    st.header("1. 조회 일자의 범위를 알려주세요")
+    # 날짜와 시간 입력
+    st.write("당월의 집계는 다음달에 나오니 이전 달까지 조회하시는 것을 추천드립니다.")
+    
 
 # 추가 정보 섹션
 st.sidebar.title("📖 도서 추천 시스템 도움말")
