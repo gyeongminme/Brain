@@ -161,11 +161,10 @@ if st.button("추천 도서 확인"):
         # 데이터프레임으로 변환 (예: 대출 도서 목록)
         books = data.get("response", {}).get("docs", [])
         st.write(books[0].get("doc","없음"))
-        st.write(books.len())
         if books:
             st.subheader("📚 추천 도서 목록")
         for book in books:
-            
+            book = book.get("doc","없음")
             # 개별 책 정보 가져오기
             book_name = book.get("bookname", "제목 없음")
             authors = book.get("authors", "저자 정보 없음")
