@@ -33,8 +33,8 @@ def fetch_library_data(startDt, endDt, gender, from_age, to_age, pageSize, dtl_k
     response = requests.get(base_url, params=params)
     
     # 디버깅용 URL 및 응답 출력
-    #st.write(f"API 호출 URL: {response.url}")
-    #st.write(f"API 응답: {response.json()}")
+    st.write(f"API 호출 URL: {response.url}")
+    st.write(f"API 응답: {response.json()}")
 
     if response.status_code == 200:
         return response.json()  # JSON 응답 반환
@@ -74,7 +74,7 @@ st.divider()
 # 1. 조회 일자 입력 startdt end dt
 st.header("1. 조회 일자의 범위를 알려주세요")
 # 날짜와 시간 입력
-st.write("당월의 집계는 다음달에 나오니 이전 달까지 조회하시는 것을 추천드립니다.");
+st.write("당월의 집계는 다음달에 나오니 이전 달까지 조회하시는 것을 추천드립니다.")
 startDt = st.date_input("범위의 시작 날짜를 선택하세요")
 endDt = st.date_input("범위의 끝 날짜을 선택하세요")
 
