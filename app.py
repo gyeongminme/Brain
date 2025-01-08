@@ -138,7 +138,7 @@ with col1 :
     #4. 페이지 크기 - 한 페이지당 제고되는 도서목록 개수 지정 pagesize
     st.header("4. 도서 추천 개수")
 
-    pageSize = st.text_input("원하시는 추천받으실 도서의s 개수를 알려주세요 !",placeholder="예: 5 (꼭 숫자만 입력해주세요 ㅜㅡㅜ)")
+    pageSize = st.text_input("원하시는 추천받으실 도서의 개수를 알려주세요 !",placeholder="예: 5 (꼭 숫자만 입력해주세요 ㅜㅡㅜ)")
     st.divider()
 
     #5. 도서구분 class_no 분류코드 
@@ -238,6 +238,10 @@ with col2:
     st.divider()
     
     st.header("책의 제목과 저자를 입력해주세요 !")
+    
+    gpt_book_name = st.text_input("책의 이름을 알려주세요 !",placeholder="예: 빙하에서 살아남기")
+    gpt_book_author = st.text_input("책의 저자를 알려주세요 !",placeholder="예: 최덕희")
+
     # 날짜와 시간 입력
     
 
