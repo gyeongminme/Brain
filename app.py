@@ -156,33 +156,64 @@ if st.button("추천 도서 확인"):
 
     st.info("추천 도서 목록은 API를 통해 곧 제공될 예정입니다.")
 
+    #
     data = fetch_library_data(startDt,endDt,gender,frome_age,to_age,pageSize,dtl_kdc)
     if data:
         # 데이터프레임으로 변환 (예: 대출 도서 목록)
         books = data.get("response", {}).get("docs", [])
         if books:
-            df = pd.DataFrame(books)
-            st.write(df)
+            st.subheader("📚 추천 도서 목록")
+        for book in books:
+            # 개별 책 정보 가져오기
+            book_name = book.get("bookname", "제목 없음")
+            authors = book.get("authors", "저자 정보 없음")
+            publisher = book.get("publisher", "출판사 정보 없음")
+            publication_year = book.get("publication_year", "출판년도 정보 없음")
+            loan_count = book.get("loan_count", 0)
+            book_image_url = book.get("bookImageURL", None)
+            book_detail_url = book.get("bookDtlUrl", "#")
 
-            # CSV로 저장
-            csv_file = "library_data.csv"
-            df.to_csv(csv_file, index=False)
-            st.success(f"데이터가 {csv_file}로 저장되었습니다.")
-        else:
-            st.warning("데이터가 없습니다.")
-    # request
+            # 책 이미지 및 설명 표시
+            if book_image_url:
+                st.image(book_image_url, width=150, caption=book_name)
+            else:
+                st.write(f"📖 {book_name}")  # 이미지가 없는 경우 텍스트만 표시
+
+            # 상세 정보 표시
+            st.markdown(
+                f"""
+                **제목**: [{book_name}]({book_detail_url})  
+                **저자**: {authors}  
+                **출판사**: {publisher}  
+                **출판년도**: {publication_year}  
+                **대출건수**: {loan_count}  
+                """,
+                unsafe_allow_html=True,
+            )
+            st.divider()  # 각 책 사이에 구분선 추가
+    else:
+        st.warning("추천 도서 목록이 없습니다.")
+else:
+    st.error("API 응답을 가져오지 못했습니다.")
 
 
 # 추가 정보 섹션
-st.sidebar.title("📖 도움말")
+st.sidebar.title("📖 도서 추천 시스템 도움말")
 st.sidebar.info(
     """
-    1. 도서관을 선택하세요.
-    2. 관심 있는 주제를 입력하세요.
-    3. 연령대를 선택하면 맞춤 도서를 추천받을 수 있습니다.
+    1. 조회 일자 범위, 연령 범위, 성별, 도서 추천 개수, 원하는 도서 분류코드를 안내에 맞게 입력해주세요 .
+    2. "추천 도서 확인" 버튼을 눌러주세요 !
+    3. 추천 받은 도서들을 확인하세요 !!
     """
 )
 
+
+st.sidebar.title("📖 도서 퀴즈 시스템 도움말")
+st.sidebar.info(
+    """
+    아직 미완성
+    """
+)
 
 
 
