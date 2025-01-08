@@ -159,7 +159,7 @@ if st.button("추천 도서 확인"):
     data = fetch_library_data(startDt,endDt,gender,frome_age,to_age,pageSize,dtl_kdc)
     if data:
         # 데이터프레임으로 변환 (예: 대출 도서 목록)
-        books = data.get("response", {}).get("docs", [])
+        books = data.get("response", {}).get("doc", [])
         if books:
             st.subheader("📚 추천 도서 목록")
         for book in books:
