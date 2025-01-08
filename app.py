@@ -3,6 +3,7 @@
 import os
 import secrets
 from openai import OpenAI
+import openai
 import streamlit as st
 import requests
 import pandas as pd
@@ -11,12 +12,16 @@ import pandas as pd
 st.set_page_config(layout="wide")
 
 con0, con1, con2 = st.columns([0.1,0.8,1])
-
 col1, center ,col2 = st.columns([0.45,0.1,0.45])
+
+
+
+openai.api_key = st.secrets["API_KEY"]
 
 
 os.environ["OPENAI_API_KEY"] = st.secrets["API_KEY"]
 client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"),)
+
 
 
 def fetch_library_data(startDt, endDt, gender, from_age, to_age, pageSize, dtl_kdc):
@@ -242,8 +247,31 @@ with col2:
     gpt_book_name = st.text_input("책의 이름을 알려주세요 !",placeholder="예: 빙하에서 살아남기")
     gpt_book_author = st.text_input("책의 저자를 알려주세요 !",placeholder="예: 최덕희")
 
-    # 날짜와 시간 입력
+    # 퀴즈 생성 함수
+    def generate_quiz(gpt_book_name, gpt_book_author):
+    # GPT-4 모델을 사용하여 퀴즈 생성 요청
+        prompt = f"책 '{gpt_book_name}'의 내용과 저자 {gpt_book_author}에 대한 퀴즈를 5문항 이상 만들어주세요. 질문과 답을 포함해주세요."
     
+        response = openai.Completion.create(
+            engine="gpt-4",  # GPT-4 모델 사용
+            prompt=prompt,
+            max_tokens=300,  # 퀴즈에 대한 길이 제한
+            temperature=0.7,  # 응답의 창의성 수준
+        )
+        
+        quiz_text = response.choices[0].text.strip()  # 생성된 퀴즈 텍스트
+        return quiz_text
+
+    # 버튼을 눌렀을 때 퀴즈 생성
+    if st.button("퀴즈 생성"):
+        if gpt_book_name and gpt_book_author:
+            with st.spinner('퀴즈를 생성하는 중...'):
+                quiz = generate_quiz(gpt_book_name, gpt_book_author)
+                st.subheader("생성된 퀴즈:")
+                st.write(quiz)  # 퀴즈 출력
+        else:
+            st.error("책 제목과 저자 이름을 모두 입력해주세요.")
+        
 
 # 추가 정보 섹션
 st.sidebar.title("📖 도서 추천 시스템 도움말")
