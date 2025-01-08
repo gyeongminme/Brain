@@ -49,15 +49,7 @@ def fetch_library_data(startDt, endDt, gender, from_age, to_age, pageSize, dtl_k
 
 
 with con1:
-    st.markdown(
-        """
-        <div style="background-color: #ffcccc; padding: 20px; border-radius: 10px;">
-            <h3>Column 1</h3>
-            This is column 1 with a light red background.
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
+
 # 앱 제목
 
     st.title("📚도서 추천 시스템📚")
@@ -78,7 +70,15 @@ api_key = st.secrets["Lib_API_KEY"]
 with col1 :
     st.title("도서 추천 시스템 !")
     st.divider()
-
+    st.markdown(
+        """
+        <div style="background-color: #ffcccc; padding: 20px; border-radius: 10px;">
+            <h3>Column 1</h3>
+            This is column 1 with a light red background.
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 # 1. 조회 일자 입력 startdt end dt
 #2. 연령을 입력하시오 age 
 #3. 성별 gender
