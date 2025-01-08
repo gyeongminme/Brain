@@ -72,14 +72,13 @@ with col1 :
     st.markdown(
         """
         <div style="background-color: #ffcccc; padding: 20px; border-radius: 10px;">
-            <h3>Column 1</h3>
+            <h3>도서 추천 시스템 !</h3>
             This is column 1 with a light red background.
         </div>
         """,
         unsafe_allow_html=True
     )
     
-    st.title("도서 추천 시스템 !")
     st.divider()
 # 1. 조회 일자 입력 startdt end dt
 #2. 연령을 입력하시오 age 
@@ -230,13 +229,12 @@ with col2:
     st.markdown(
         """
         <div style="background-color: #ccccff; padding: 20px; border-radius: 10px;">
-            <h3>Column 3</h3>
+            <h3>도서 퀴즈 시스템</h3>
             This is column 3 with a light blue background.
         </div>
         """,
         unsafe_allow_html=True
     )
-    st.title("도서 퀴즈 시스템")
     st.divider()
     
     st.header("1. 조회 일자의 범위를 알려주세요")
