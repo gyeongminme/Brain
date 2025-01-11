@@ -6,6 +6,8 @@ from openai import OpenAI
 import streamlit as st
 import requests
 import pandas as pd
+import openai
+
     #http://data4library.kr/api/loanItemSrch?authKey=ce0c893b3fcd2b1080903988f1fdd1367c7f811cdcad7d0a3a2ab99666816111&startDt=2020-01-01&endDt=2024-12-11&gender=1&frome_age=0&to_age=100&pageSize=2&dtl_region=00&format=json
 
 st.set_page_config(layout="wide")
@@ -15,7 +17,7 @@ col1, center ,col2 = st.columns([0.45,0.1,0.45])
 
 
 
-OpenAI.api_key = st.secrets["API_KEY"]
+openai.api_key = st.secrets["API_KEY"]
 
 
 os.environ["OPENAI_API_KEY"] = st.secrets["API_KEY"]
@@ -256,7 +258,7 @@ with col2:
     # GPT-4 모델을 사용하여 퀴즈 생성 요청
         prompt = f"책 '{gpt_book_name}'의 내용과 저자 {gpt_book_author}에 대한 퀴즈를 3문항 만들어주세요. 질문과 답을 포함해주세요."
     
-        response = OpenAI.Completion.create(
+        response = openai.Completion.create(
             engine="gpt-4",  # GPT-4 모델 사용
             prompt=prompt,
             max_tokens=300,  # 퀴즈에 대한 길이 제한
