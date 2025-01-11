@@ -22,7 +22,7 @@ client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"),)
 def fetch_library_data(startDt, endDt, gender, from_age, to_age, pageSize, dtl_kdc):
     base_url = "http://data4library.kr/api/loanItemSrch"
     params = {
-        "authKey": api_key,
+        "authKey": api_key_lib,
         "startDt": startDt,
         "endDt": endDt,
         "gender": gender,
@@ -65,7 +65,7 @@ with con1:
 # 재료 입력 받기
 #food = st.text_input("aa .")
 
-api_key = st.secrets["Lib_API_KEY"]
+api_key_lib = st.secrets["Lib_API_KEY"]
 # API 키 출력 (테스트용)
  
 #http://data4library.kr/api/loanItemSrch?authKey=ce0c893b3fcd2b1080903988f1fdd1367c7f811cdcad7d0a3a2ab99666816111&startDt=2022-01-01&endDt=2022-03-31& 
