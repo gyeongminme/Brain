@@ -255,7 +255,7 @@ with col2:
     # GPT-4 모델을 사용하여 퀴즈 생성 요청
         prompt = f"책 '{gpt_book_name}'의 내용과 저자 {gpt_book_author}에 대한 퀴즈를 3문항 만들어주세요. 질문과 답을 포함해주세요."
     
-        response = openai.Completion.create(
+        response = openai.ChatCompletion.create(
             engine="gpt-4",  # GPT-4 모델 사용
             prompt=prompt,
             max_tokens=300,  # 퀴즈에 대한 길이 제한
