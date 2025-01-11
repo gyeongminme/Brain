@@ -17,7 +17,7 @@ col1, center ,col2 = st.columns([0.45,0.1,0.45])
 
 
 os.environ["OPENAI_API_KEY"] = st.secrets["API_KEY"]
-openai.api_key = os.environ["OPENAI_API_KEY"]
+client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"),)
 
 
 
@@ -251,18 +251,30 @@ with col2:
     gpt_book_author = st.text_input("책의 저자를 알려주세요 !",placeholder="예: 최덕희")
 
     # 퀴즈 생성 함수
+    # 퀴즈 생성 함수
     def generate_quiz(gpt_book_name, gpt_book_author):
-    # GPT-4 모델을 사용하여 퀴즈 생성 요청
-        prompt = f"책 '{gpt_book_name}'의 내용과 저자 {gpt_book_author}에 대한 퀴즈를 3문항 만들어주세요. 질문과 답을 포함해주세요."
-    
+        # GPT-4 모델을 사용하여 퀴즈 생성 요청
+        messages = [
+            {
+                "role": "system",
+                "content": "당신은 퀴즈 생성 전문가입니다. 사용자가 제공한 책의 내용에 기반하여 퀴즈를 작성하세요.",
+            },
+            {
+                "role": "user",
+                "content": f"책 '{gpt_book_name}'의 내용과 저자 {gpt_book_author}에 대한 퀴즈를 3문항 만들어주세요. 질문과 답을 포함해주세요.",
+            },
+        ]
+
+        # ChatCompletion 호출
         response = openai.ChatCompletion.create(
-            engine="gpt-4",  # GPT-4 모델 사용
-            prompt=prompt,
-            max_tokens=300,  # 퀴즈에 대한 길이 제한
-            temperature=0.7,  # 응답의 창의성 수준
+            model="gpt-4",  # GPT-4 모델
+            messages=messages,
+            max_tokens=300,  # 응답의 최대 길이
+            temperature=0.7,  # 응답의 창의성
         )
-        
-        quiz_text = response.choices[0].text.strip()  # 생성된 퀴즈 텍스트
+
+        # 응답 내용 추출
+        quiz_text = response.choices[0].message.content.strip()
         return quiz_text
 
     # 버튼을 눌렀을 때 퀴즈 생성
