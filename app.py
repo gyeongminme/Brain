@@ -21,7 +21,7 @@ openai.api_key = st.secrets["API_KEY"]
 
 
 os.environ["OPENAI_API_KEY"] = st.secrets["API_KEY"]
-client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"),)
+client = openai(api_key=os.environ.get("OPENAI_API_KEY"),)
 
 
 
