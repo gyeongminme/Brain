@@ -20,8 +20,6 @@ os.environ["OPENAI_API_KEY"] = st.secrets["API_KEY"]
 openai.api_key = os.environ["OPENAI_API_KEY"]
 
 
-client = openai(api_key=os.environ.get("OPENAI_API_KEY"),)
-
 
 
 def fetch_library_data(startDt, endDt, gender, from_age, to_age, pageSize, dtl_kdc):
