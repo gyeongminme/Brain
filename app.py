@@ -3,7 +3,6 @@
 import os
 import secrets
 from openai import OpenAI
-import openai
 import streamlit as st
 import requests
 import pandas as pd
@@ -16,7 +15,7 @@ col1, center ,col2 = st.columns([0.45,0.1,0.45])
 
 
 
-openai.api_key = st.secrets["API_KEY"]
+OpenAI.api_key = st.secrets["API_KEY"]
 
 
 os.environ["OPENAI_API_KEY"] = st.secrets["API_KEY"]
@@ -226,7 +225,7 @@ with col1 :
 with center:
     st.markdown(
         """
-        <div style="background-color: #000000; padding: 20px; border-radius: 10px; height: 250vh; position: relative;">
+        <div style="background-color:rgb(0, 255, 98), 45) 37, 37); padding: 20px; border-radius: 10px; height: 250vh; position: relative;">
             <h3>📚📚📚</h3>
             
         </div>
@@ -255,9 +254,9 @@ with col2:
     # 퀴즈 생성 함수
     def generate_quiz(gpt_book_name, gpt_book_author):
     # GPT-4 모델을 사용하여 퀴즈 생성 요청
-        prompt = f"책 '{gpt_book_name}'의 내용과 저자 {gpt_book_author}에 대한 퀴즈를 5문항 이상 만들어주세요. 질문과 답을 포함해주세요."
+        prompt = f"책 '{gpt_book_name}'의 내용과 저자 {gpt_book_author}에 대한 퀴즈를 3문항 만들어주세요. 질문과 답을 포함해주세요."
     
-        response = openai.Completion.create(
+        response = OpenAI.Completion.create(
             engine="gpt-4",  # GPT-4 모델 사용
             prompt=prompt,
             max_tokens=300,  # 퀴즈에 대한 길이 제한
