@@ -14,8 +14,8 @@ st.set_page_config(layout="wide")
 con0, con1, con2 = st.columns([0.1,0.8,0.1])
 col1, center ,col2 = st.columns([0.45,0.1,0.45])
 
-
-os.environ["OPENAI_API_KEY"] = st.secrets["API_KEY"]
+api_gpt = st.secrets["API_KEY"]
+os.environ["OPENAI_API_KEY"] = api_gpt
 client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"),)
 
 
