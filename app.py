@@ -222,7 +222,7 @@ with col1 :
             st.warning("추천 도서 목록이 없습니다.")
     else:
         st.error("API 응답을 가져오지 못했습니다.")
-      
+
 
 with center:
     st.markdown(
@@ -296,7 +296,3 @@ st.sidebar.info(
     아직 미완성!
     """
 )
-
-
-
-
