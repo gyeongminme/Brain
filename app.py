@@ -265,7 +265,7 @@ with col2:
         ]
 
         # ChatCompletion 호출
-        response = openai.ChatCompletion.create(
+        response = OpenAI.ChatCompletion.create(
             model="gpt-4",  # GPT-4 모델
             messages=messages,
             max_tokens=300,  # 응답의 최대 길이
