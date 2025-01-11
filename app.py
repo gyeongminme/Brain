@@ -253,6 +253,7 @@ with col2:
     # 퀴즈 생성 함수
     def generate_quiz(gpt_book_name, gpt_book_author):
         # GPT-4 모델을 사용하여 퀴즈 생성 요청
+        chat_completion = client.chat.completions.create(
         messages = [
             {
                 "role": "system",
@@ -260,21 +261,15 @@ with col2:
             },
             {
                 "role": "user",
-                "content": f"책 '{gpt_book_name}'의 내용과 저자 {gpt_book_author}에 대한 퀴즈를 3문항 만들어주세요. 질문과 답을 포함해주세요.",
+                "content": f"책 '{gpt_book_name}'의 내용과 저자 {gpt_book_author}에 대한 퀴즈를 1문항 만들어주세요. 질문과 답을 포함해주세요.",
             },
-        ]
-
-        # ChatCompletion 호출
-        response = OpenAI.ChatCompletion.create(
-            model="gpt-4",  # GPT-4 모델
-            messages=messages,
-            max_tokens=300,  # 응답의 최대 길이
-            temperature=0.7,  # 응답의 창의성
+        ],
+        model="gpt-4o",
         )
 
         # 응답 내용 추출
-        quiz_text = response.choices[0].message.content.strip()
-        return quiz_text
+        result = chat_completion.choices[0].message.content
+        return result
 
     # 버튼을 눌렀을 때 퀴즈 생성
     if st.button("퀴즈 생성"):
