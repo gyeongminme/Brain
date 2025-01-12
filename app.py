@@ -13,7 +13,6 @@ con0, con1, con2 = st.columns([0.1,0.8,0.1])
 col1, center ,col2 = st.columns([0.45,0.1,0.45])
 
 api_gpt = st.secrets["API_KEY"]
-st.write(api_gpt)
 os.environ["OPENAI_API_KEY"] = api_gpt
 client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"),)
 
@@ -301,21 +300,3 @@ st.sidebar.info(
 
 
 
-# 재료 입력 받기
-food = st.text_input("어떤 재료를 가지고 계신가요?")
-
-# 재료로 요리 생성
-if st.button("홍보문구 및 포스터 생성"):
-    chat_completion = client.chat.completions.create(
-        messages=[
-            {
-                "role": "user",
-                "content": food,
-            },
-            {
-                "role": "system",
-                "content": "위에서 입력받은 음식의 홍보 문구를 간략하게 작성해주세요.",
-            }
-        ],
-        model="gpt-4",
-    )
