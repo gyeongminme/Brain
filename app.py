@@ -305,7 +305,7 @@ st.sidebar.info(
 food = st.text_input("어떤 재료를 가지고 계신가요?")
 
 # 재료로 요리 생성
-if st.button("레시피 생성하기"):
+if st.button("홍보문구 및 포스터 생성"):
     chat_completion = client.chat.completions.create(
         messages=[
             {
@@ -314,10 +314,8 @@ if st.button("레시피 생성하기"):
             },
             {
                 "role": "system",
-                "content": "입력받은 재료로 만들 수 있는 맛있는 요리 레시피를 작성해주세요.",
-            },
+                "content": "위에서 입력받은 음식의 홍보 문구를 간략하게 작성해주세요.",
+            }
         ],
-        model="gpt-4o",
+        model="gpt-4",
     )
-    result = chat_completion.choices[0].message.content
-    st.write(result)
